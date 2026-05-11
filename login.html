@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PPDB SMKN 4 Palembang</title>
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body{
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+      overflow: hidden;
+    }
+
+
+    body::before{
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      top: -120px;
+      left: -120px;
+      filter: blur(10px);
+    }
+
+    body::after{
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      bottom: -100px;
+      right: -100px;
+      filter: blur(10px);
+    }
+
+    .login-container{
+      position: relative;
+      width: 380px;
+      padding: 40px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 25px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      color: white;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to{
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo{
+      width: 90px;
+      margin-bottom: 15px;
+    }
+
+    .login-container h1{
+      font-size: 28px;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    .login-container p{
+      font-size: 14px;
+      color: #dbeafe;
+      margin-bottom: 30px;
+    }
+
+    .input-box{
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .input-box input{
+      width: 100%;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 12px;
+      outline: none;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .input-box input::placeholder{
+      color: #e2e8f0;
+    }
+
+    .input-box input:focus{
+      background: rgba(255,255,255,0.25);
+      border: 1px solid #93c5fd;
+    }
+
+    .login-btn{
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(37,99,235,0.4);
+    }
+
+    .login-btn:hover{
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #60a5fa, #2563eb);
+      box-shadow: 0 8px 20px rgba(37,99,235,0.6);
+    }
+
+    .footer{
+      margin-top: 20px;
+      font-size: 12px;
+      color: #dbeafe;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+
+    <img src="c:\Users\acern_3vm3dff\Downloads\LOGO SMK.jpeg" 
+         alt="Logo SMKN 4" 
+         class="logo">
+
+    <h1>PPDB SMKN 4</h1>
+    <p>Silakan login menggunakan akun Anda</p>
+
+    <form>
+      <div class="input-box">
+        <input type="email" placeholder="Masukkan Email" required>
+      </div>
+
+      <div class="input-box">
+        <input type="password" placeholder="Masukkan Password" required>
+      </div>
+
+      <button type="submit" class="login-btn">LOGIN</button>
+    </form>
+
+    <div class="footer">© 2026 PPDB SMKN 4 Palembang</div>
+  </div>
+</body>
+</html>
