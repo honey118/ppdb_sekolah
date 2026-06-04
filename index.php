@@ -1,411 +1,448 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PPDB - Portal Pendaftaran Siswa Baru</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPDB SMKN 4 Palembang - Penerimaan Peserta Didik Baru</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Tambahan styling untuk halaman utama */
+        header {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-    }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    /* Header */
-    header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 20px 0;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+        }
 
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
 
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+        .nav-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
 
-    .logo-area h1 {
-      font-size: 24px;
-      font-weight: bold;
-    }
+        .nav-btn-login {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-    .logo-area p {
-      font-size: 12px;
-      opacity: 0.9;
-    }
+        .nav-btn-login:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
 
-    .nav-button {
-      background: white;
-      color: #667eea;
-      padding: 10px 25px;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+        .nav-btn-register {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            color: white;
+        }
 
-    .nav-button:hover {
-      background: #f0f0f0;
-      transform: translateY(-2px);
-    }
+        .nav-btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(96, 165, 250, 0.4);
+        }
 
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 80px 20px;
-      text-align: center;
-      margin-bottom: 40px;
-    }
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
 
-    .hero h2 {
-      font-size: 42px;
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
 
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 30px;
-      opacity: 0.95;
-    }
+        .hero p {
+            font-size: 18px;
+            color: #dbeafe;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    .cta-buttons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    .btn {
-      padding: 14px 35px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
+        .cta-btn {
+            padding: 15px 35px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
 
-    .btn-primary {
-      background: white;
-      color: #667eea;
-    }
+        .cta-btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            color: white;
+        }
 
-    .btn-primary:hover {
-      background: #f0f0f0;
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
+        .cta-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(96, 165, 250, 0.5);
+        }
 
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-    }
+        .cta-btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-    .btn-secondary:hover {
-      background: white;
-      color: #667eea;
-    }
+        .cta-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
 
-    /* Main Content */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+        /* Content Sections */
+        .content-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
 
-    .section {
-      margin-bottom: 60px;
-    }
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
 
-    .section-title {
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 30px;
-      text-align: center;
-      color: #333;
-      border-bottom: 3px solid #667eea;
-      padding-bottom: 15px;
-    }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
 
-    /* Info Cards */
-    .info-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-bottom: 40px;
-    }
+        .info-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+        }
 
-    .card {
-      background: white;
-      border-radius: 8px;
-      padding: 30px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      border-top: 4px solid #667eea;
-    }
+        .info-card:hover {
+            transform: translateY(-10px);
+            border-color: #60a5fa;
+            box-shadow: 0 12px 40px rgba(96, 165, 250, 0.3);
+        }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
+        .info-card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
 
-    .card h3 {
-      font-size: 20px;
-      margin-bottom: 15px;
-      color: #667eea;
-    }
+        .info-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
 
-    .card p {
-      color: #666;
-      line-height: 1.8;
-    }
+        .info-card p {
+            font-size: 15px;
+            line-height: 1.6;
+        }
 
-    /* Timeline */
-    .timeline {
-      background: white;
-      border-radius: 8px;
-      padding: 40px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
+        /* Timeline */
+        .timeline {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
 
-    .timeline-item {
-      display: flex;
-      gap: 30px;
-      margin-bottom: 30px;
-      padding-bottom: 30px;
-      border-bottom: 1px solid #eee;
-    }
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            border-left: 4px solid #60a5fa;
+        }
 
-    .timeline-item:last-child {
-      border-bottom: none;
-    }
+        .timeline-item h4 {
+            color: #60a5fa;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
 
-    .timeline-date {
-      background: #667eea;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      min-width: 120px;
-      text-align: center;
-      font-weight: bold;
-    }
+        .timeline-item p {
+            text-align: left;
+            font-size: 14px;
+            color: #dbeafe;
+        }
 
-    .timeline-content h4 {
-      color: #333;
-      margin-bottom: 5px;
-      font-size: 18px;
-    }
+        /* Contact Section */
+        .contact-section {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+        }
 
-    .timeline-content p {
-      color: #666;
-    }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
 
-    /* Footer */
-    footer {
-      background: #333;
-      color: white;
-      padding: 40px 20px 20px;
-      margin-top: 60px;
-    }
+        .contact-item {
+            text-align: center;
+        }
 
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-bottom: 30px;
-    }
+        .contact-item h4 {
+            color: #60a5fa;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
 
-    .footer-section h4 {
-      margin-bottom: 15px;
-      color: #667eea;
-    }
+        .contact-item p {
+            font-size: 15px;
+            color: #dbeafe;
+            text-align: center;
+        }
 
-    .footer-section p, .footer-section a {
-      color: #ccc;
-      text-decoration: none;
-      margin-bottom: 10px;
-      display: block;
-      line-height: 1.8;
-    }
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            color: #dbeafe;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    .footer-section a:hover {
-      color: white;
-    }
+        footer p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
 
-    .footer-bottom {
-      text-align: center;
-      border-top: 1px solid #555;
-      padding-top: 20px;
-      color: #999;
-    }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero h2 {
-        font-size: 28px;
-      }
+            .hero p {
+                font-size: 16px;
+            }
 
-      .hero p {
-        font-size: 16px;
-      }
+            .section-title {
+                font-size: 28px;
+                margin-bottom: 30px;
+            }
 
-      .section-title {
-        font-size: 24px;
-      }
+            .cta-buttons {
+                flex-direction: column;
+            }
 
-      .header-container {
-        flex-direction: column;
-        gap: 15px;
-      }
+            .cta-btn {
+                width: 100%;
+            }
 
-      .timeline-item {
-        flex-direction: column;
-      }
+            .nav-buttons {
+                gap: 10px;
+            }
 
-      .cta-buttons {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-    }
-  </style>
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <div class="logo-area">
-        <div>
-          <h1>🎓 PPDB</h1>
-          <p>Portal Penerimaan Peserta Didik Baru</p>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">PPDB SMKN 4</div>
+            <div class="nav-buttons">
+                <a href="login.php" class="nav-btn nav-btn-login">Login</a>
+                <a href="registrasi.php" class="nav-btn nav-btn-register">Daftar</a>
+            </div>
         </div>
-      </div>
-      <button class="nav-button">Masuk</button>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Penerimaan Peserta Didik Baru<br>SMKN 4 Palembang</h1>
+        <p>Bergabunglah dengan ribuan siswa di sekolah unggulan kami dan raih masa depan yang cerah</p>
+        <div class="cta-buttons">
+            <a href="registrasi.php" class="cta-btn cta-btn-primary">Daftar Sekarang</a>
+            <a href="#informasi" class="cta-btn cta-btn-secondary">Lihat Informasi</a>
+        </div>
     </div>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <h2>Selamat Datang di PPDB Kami</h2>
-      <p>Daftarkan dirimu sekarang dan bergabunglah dengan ribuan siswa yang telah memilih kami</p>
-      <div class="cta-buttons">
-        <button class="btn btn-primary">📝 Daftar Sekarang</button>
-        <button class="btn btn-secondary">ℹ️ Pelajari Lebih Lanjut</button>
-      </div>
+    <!-- Informasi PPDB -->
+    <div class="content-container" id="informasi">
+        <h2 class="section-title">Informasi Pendaftaran</h2>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-card-icon">📋</div>
+                <h3>Syarat & Ketentuan</h3>
+                <p>Memiliki ijazah SMP/MTs, mengisi formulir pendaftaran lengkap, dan menyiapkan dokumen yang diperlukan</p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon">💻</div>
+                <h3>Pendaftaran Online</h3>
+                <p>Proses pendaftaran dilakukan 100% online. Daftarkan akun Anda dan lengkapi data diri dengan benar</p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon">✅</div>
+                <h3>Verifikasi Data</h3>
+                <p>Setiap data pendaftaran akan diverifikasi oleh panitia PPDB. Status akan diupdate secara berkala</p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon">🏫</div>
+                <h3>Jurusan Tersedia</h3>
+                <p>Teknik Kendaraan Ringan, Teknik Audio Video, Teknik Komputer Jaringan, Rekayasa Perangkat Lunak, Desain Pemodelan dan Informasi Bangunan, Teknik Sepeda Motor, Teknik Permesinan dan Teknik Listrik</p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon">📚</div>
+                <h3>Fasilitas Lengkap</h3>
+                <p>Laboratorium modern, perpustakaan digital, aula, dan fasilitas olahraga yang memadai</p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon">🎖️</div>
+                <h3>Prestasi Terjamin</h3>
+                <p>Lulusan kami banyak yang melanjutkan ke PTN dan DTN, serta memiliki pengalaman industri</p>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <!-- Main Content -->
-  <div class="container">
-    <!-- Info Section -->
-    <section class="section">
-      <h2 class="section-title">Informasi PPDB</h2>
-      <div class="info-cards">
-        <div class="card">
-          <h3>📌 Tentang PPDB</h3>
-          <p>PPDB adalah sistem penerimaan siswa baru yang terbuka dan transparan. Kami berkomitmen untuk memberikan kesempatan yang sama kepada semua calon siswa yang memenuhi persyaratan.</p>
-        </div>
-        <div class="card">
-          <h3>✅ Persyaratan</h3>
-          <p>Persyaratan pendaftaran meliputi dokumen identitas, nilai rapor, dan surat rekomendasi dari sekolah asal. Semua dokumen harus dalam kondisi lengkap dan asli.</p>
-        </div>
-        <div class="card">
-          <h3>🎯 Pendaftaran Online</h3>
-          <p>Proses pendaftaran dilakukan sepenuhnya secara online melalui portal ini. Anda dapat menyelesaikan pendaftaran kapan saja dan di mana saja dengan koneksi internet.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Timeline Section -->
-    <section class="section">
-      <h2 class="section-title">Jadwal Penting</h2>
-      <div class="timeline">
+    <!-- Timeline -->
+    <div class="timeline">
+        <h2 class="section-title">Jadwal Pendaftaran</h2>
+        
         <div class="timeline-item">
-          <div class="timeline-date">1 - 10 Juni</div>
-          <div class="timeline-content">
             <h4>Pendaftaran Dibuka</h4>
-            <p>Portal pendaftaran PPDB resmi dibuka. Pastikan Anda menyiapkan semua dokumen yang diperlukan sebelum mendaftar.</p>
-          </div>
+            <p>1 Juni 2026</p>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-date">11 - 15 Juni</div>
-          <div class="timeline-content">
-            <h4>Verifikasi Dokumen</h4>
-            <p>Tim kami akan melakukan verifikasi terhadap semua dokumen yang telah diupload. Mohon bersabar menunggu hasil verifikasi.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">16 - 20 Juni</div>
-          <div class="timeline-content">
-            <h4>Tes Masuk (Jika diperlukan)</h4>
-            <p>Calon siswa yang lulus verifikasi dokumen akan mengikuti tes masuk. Detil tempat dan waktu tes akan diumumkan lebih lanjut.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">25 Juni</div>
-          <div class="timeline-content">
-            <h4>Pengumuman Hasil</h4>
-            <p>Hasil akhir PPDB akan diumumkan melalui portal ini. Anda dapat mengecek status penerimaan Anda secara langsung.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h4>Tentang Kami</h4>
-        <p>PPDB adalah platform resmi penerimaan siswa baru yang dirancang untuk memberikan pengalaman pendaftaran yang mudah dan transparan bagi calon siswa.</p>
-      </div>
-      <div class="footer-section">
-        <h4>Tautan Penting</h4>
-        <a href="#beranda">Beranda</a>
-        <a href="#pendaftaran">Pendaftaran</a>
-        <a href="#informasi">Informasi</a>
-        <a href="#kontak">Hubungi Kami</a>
-      </div>
-      <div class="footer-section">
-        <h4>Hubungi Kami</h4>
-        <p>📧 Email: ppdb@sekolah.com</p>
-        <p>📞 Telepon: (0711) 123-4567</p>
-        <p>📍 Alamat: Jalan Pendidikan No. 123, Palembang</p>
-      </div>
+        <div class="timeline-item">
+            <h4>Batas Pendaftaran</h4>
+            <p>31 Juli 2026</p>
+        </div>
+
+        <div class="timeline-item">
+            <h4>Verifikasi Data</h4>
+            <p>1 - 15 Agustus 2026</p>
+        </div>
+
+        <div class="timeline-item">
+            <h4>Pengumuman Hasil</h4>
+            <p>20 Agustus 2026</p>
+        </div>
+
+        <div class="timeline-item">
+            <h4>Daftar Ulang</h4>
+            <p>21 - 31 Agustus 2026</p>
+        </div>
+
+        <div class="timeline-item">
+            <h4>Tahun Ajaran Baru</h4>
+            <p>1 September 2026</p>
+        </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 PPDB - Semua Hak Dilindungi Undang-Undang</p>
+
+    <!-- Kontak -->
+    <div class="contact-section" id="kontak">
+        <h2 class="section-title">Hubungi Kami</h2>
+        
+        <div class="contact-grid">
+            <div class="contact-item">
+                <h4>Alamat</h4>
+                <p>Jl. Sersan Sani, Palembang<br>Sumatera Selatan 30128</p>
+            </div>
+
+            <div class="contact-item">
+                <h4>Telepon</h4>
+                <p>(0711) 123-4567<br>(0711) 765-4321</p>
+            </div>
+
+            <div class="contact-item">
+                <h4>Email</h4>
+                <p>ppdb@smkn4palembang.sch.id<br>info@smkn4palembang.sch.id</p>
+            </div>
+
+            <div class="contact-item">
+                <h4>Website</h4>
+                <p>www.smkn4palembang.sch.id</p>
+            </div>
+
+            <div class="contact-item">
+                <h4>WhatsApp</h4>
+                <p>(0821) 8765-4321</p>
+            </div>
+
+            <div class="contact-item">
+                <h4>Jam Operasional</h4>
+                <p>Senin - Jumat<br>08:00 - 15:30 WIB</p>
+            </div>
+        </div>
     </div>
-  </footer>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 PPDB SMKN 4 Palembang. Semua hak cipta dilindungi.</p>
+        <p>Dikembangkan dengan ❤️ untuk kemajuan pendidikan</p>
+    </footer>
 </body>
 </html>
